@@ -48,7 +48,7 @@ def main():
             base = libs[each]
             break
 
-    main_arena_offset = offset - base
+    main_arena_offset = offset - base - 0x58
     context.log_level='info'
     logging.success('main arena offset:%s', hex(main_arena_offset))
     os.remove(program_name)
