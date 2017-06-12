@@ -2,6 +2,7 @@
 import argparse
 from pwn import *
 import os
+import shutil
 
 def parse_arg():
     parser = argparse.ArgumentParser("get some libc's main_arena offset")
@@ -33,9 +34,11 @@ int main() {
 
 
 def main():
-    logging = log.progress("finding offset...")
     context.log_level = 'error'
     libc = parse_arg().libc
+    logging = log.progress("finding offset...")
+    shutil.copy(libc, 'libc.so.6')
+    libc = 'libc.so.6'
     program_name = generate_program()
 
     p = process(program_name)
@@ -48,6 +51,7 @@ def main():
             base = libs[each]
             break
 
+    os.remove(libc)
     main_arena_offset = offset - base - 0x58
     context.log_level='info'
     logging.success('main arena offset:%s', hex(main_arena_offset))
