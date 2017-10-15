@@ -5,7 +5,7 @@ simple script to get main arena offset to a given libc
 First, install pwntools.
 Then, use this like this:
 ```
-./get_main_arena [libc name]
+./main_arena_offset [libc name]
 ```
 
 # example
