@@ -26,6 +26,7 @@ int main() {
     '''
     with open('__get_main_arena__.c', 'w') as f:
         f.write(program)
+    f.close()
     compile_proc = \
     s = process('gcc -Xlinker -rpath=$PWD/ __get_main_arena__.c -o __get_main_arena__', shell=True)
     s.wait_for_close()
